@@ -1,0 +1,48 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+
+    <div class="post" >
+    {% if form.errors %}
+        <p>Nieprawidłowy login lub hasło. Spróbuj ponownie.</p>
+    {% endif %}
+    <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+        <table>
+        <tr>
+            <td>{{ form.username.label_tag }}</td>
+            <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password.label_tag }}</td>
+            <td>{{ form.password }}</td>
+        </tr>
+        </table>
+
+        <input type="submit" value="login" />
+
+        {% if form.errors %}
+            <a href="{% url 'password_reset' %}">Zapomniałeś hasła?</a>
+        {% endif %}
+        <br>            
+        <h3>Zaloguj przez :</h3>
+                <div class="form-group">
+                    <ul class="socialaccount_providers noDotsList">
+                        <li class="buttonListMargin">
+                            <button class="btn w100 googleButton">
+                                <a title="Google" class="socialaccount_provider google socialSiteAnchor" href="/accounts/google/login/?process=login">
+                                    Google
+                                </a>
+                            </button>
+                                <div class="form-group">
+                    <ul class="socialaccount_providers noDotsList">
+                        <li class="buttonListMargin">
+                            <button class="btn w100 githubButton">
+                                <a title="Github" class="socialaccount_provider github socialSiteAnchor" href="/accounts/github/login/?process=login">
+                                    Github
+                                </a>
+                            </button>
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    </div>
+{% endblock %}
