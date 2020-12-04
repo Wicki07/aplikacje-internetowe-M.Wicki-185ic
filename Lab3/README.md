@@ -2,7 +2,7 @@
 
 ### Autor: Mateusz Wicki Grupa: 185IC_B1
 
-# Próba umieszczenia aplikacji na PythonAnyWhere niestety zakończyła się niepowodzeniem
+### Próba umieszczenia aplikacji na PythonAnyWhere niestety zakończyła się niepowodzeniem
 
 # Panel Administratora
 ![](https://github.com/Wicki07/aplikacje-internetowe-M.Wicki-185ic/blob/master/Lab3/Zrzuty_ekranu/1.PNG)
