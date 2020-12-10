@@ -56,3 +56,7 @@ REST_FRAMEWORK = {
         ],
 }
 ```
+### Dodanie licznika przy pomocy cookies
+
+![](https://i.imgur.com/lb9eMbt.png)
+![](https://i.imgur.com/TJY3WNT.png)
