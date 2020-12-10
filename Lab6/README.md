@@ -21,3 +21,38 @@ Aby panel rejstracji działał poprawnie należy dodać w pliku `setting.py` nas
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SITE_ID = 1
 ```
+
+Podaczas rejestracji jest tworzony tokken więc jeżeli w pliku `setting.py` mamy ***SessionAuthentication*** oraz ***TokenAuthentication***
+użytkownicy utworzeni wcześniej będą mieli wgląd do postów.
+
+```python
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        #'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
+        ],
+        
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+            'rest_framework.authentication.SessionAuthentication',
+            # 'rest_framework.authentication.BasicAuthentication',
+            'rest_framework.authentication.TokenAuthentication', 
+        ],
+}
+```
+
+Jeśli natomiast usuniemy ***SessionAuthentication*** wgląd do postów będą mieli tylko użytkownicy z tokkenem
+
+```python
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        #'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
+        ],
+        
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+            # 'rest_framework.authentication.SessionAuthentication',
+            # 'rest_framework.authentication.BasicAuthentication',
+            'rest_framework.authentication.TokenAuthentication', 
+        ],
+}
+```
