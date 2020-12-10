@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'lab5',
+    'django-bs4',
+    'django.forms',
 ]
 
 MIDDLEWARE = [

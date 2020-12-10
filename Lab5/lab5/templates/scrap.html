@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <html>
+        <head>
+            <title>Web Scraping</title>
+        </head>
+        <body>            
+            <form method="POST" style="font-family:'Bevan'">
+                {% csrf_token %}
+                <div class="justify-content-md-center">
+                    <div class="justify-content-md-center mt-5">
+                        <h5>Wpisz url</h5>
+                        <input type="text" name="web_link" required>
+                    </div>
+                    <div class="justify-content-md-center mt-3">
+                        <h5>Podaj szukany elemnt</h5>
+                        <input type="text" name="element" required>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col" style="text-align: center;">
+                        <button type="submit" class="btn btn-success">Szukaj</button>
+                    </div>
+                </div>                
+            </form>
+                <div class="card-body">
+                <p>Zakończono scrapowanie strony: <br><b>{{ url }}</b></p><br>
+                <p>Szukany element: <b>{{ element }}</b></p><br>
+                <p>Znaleziono <b>{{amount}}</b> elemntów.</p><br>
+
+            {% for i in all_elements %}
+                <h4 class="mt-5">Element nr: {{i.index}}</h4>
+                    {% if i.find_id != "Brak" %}
+                        <b>Id</b> = {{i.find_id}} <br> 
+                    {% endif %}
+                    {% if i.find_class != "Brak" %}
+                        <b>Class</b> = {{i.find_class}} <br> 
+                    {% endif %}
+               
+                    {% if i.find_href != "Brak" %}
+                        <b>Link</b> = {{i.find_href}} <br>  
+                    {% endif %}
+               
+                    {% if i.get_text != "Brak" %}
+                        <b>Text</b> = {{i.get_text}} <br> 
+                    {% endif %}
+                    {% if i.find_src != "Brak" %}
+                        <b>Src</b> = {{i.find_src}}<br>
+                    {% endif %}
+                    {% if i.find_alt != "Brak" %}
+                        <b>Alt</b> = {{i.find_alt}}<br>
+                    {% endif %}     
+            {% empty %}
+                <h4>Brak danych do wyświetlenia</h4>
+            {% endfor %}
+    </div>
+        </body>
+    </html>
+{% endblock %}
