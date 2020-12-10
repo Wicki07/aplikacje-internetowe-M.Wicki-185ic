@@ -12,6 +12,12 @@ Poniżej przedstawione widoki poszeczególnych paneli
 
 ![](https://i.imgur.com/Gp0e5Lz.png)
 ![](https://i.imgur.com/L7lPoaN.png)
-![](https://i.imgur.com/Mnxk3Nu.png)
 ![](https://i.imgur.com/a3Kvb3C.png)
 ![](https://i.imgur.com/ux2esZa.png)
+![](https://i.imgur.com/Mnxk3Nu.png)
+
+Aby panel rejstracji działał poprawnie należy dodać w pliku `setting.py` nastepujący kod
+```python
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SITE_ID = 1
+```
