@@ -153,4 +153,33 @@ Wygląd na stronie
 
 Aby znaleźć elemnt przy pomocy xPath potrzebuje adresu strony oraz xPath szukanego elemntu. Pobieramy go poprzez naciśnięcia na elemnt prawym przyciskiem myszki następnie ``Zbadaj`` najeżdżamy na wybrany elemnt i wybieramy ``Copy -> Copy xPath``
 
+![](https://i.imgur.com/GsVdR3x.png)
+![](https://i.imgur.com/9aNkPe5.png)
 
+Kod do podanego fragmentu
+```python
+    #link do strony
+    url = 'https://codedamn-classrooms.github.io/webscraper-python-codedamn-classroom-website/'  
+    # xPath elemntu
+    path = '/html/body/div[1]/div[2]/div/div/div'
+    response = requests.get(url)
+    source = html.fromstring(response.content)    
+    tree = source.xpath(path)
+    lxml1 = tree[0].text_content()
+```
+
+Aby znaleźć elemnt przy pomocy nazwy klasy należy ją pobrać. Aby ją znaleźć naciśnięcia na elemnt prawym przyciskiem myszki następnie ``Zbadaj`` a następnie odszukujemy `class=""`
+
+![](https://i.imgur.com/DkyB3oF.png)
+
+Kod do podanego fragmentu
+```python
+    # link do strony
+    url = 'https://codedamn-classrooms.github.io/webscraper-python-codedamn-classroom-website/'
+    # podajemy atrybut po którym ma szukać w tym przypadku class oraz nazwę klasy
+    path = '//*[@class="jumbotron"]'    
+    response = requests.get(url)    
+    source = html.fromstring(response.content)    
+    tree = source.xpath(path)
+    lxml2 = tree[0].text_content()
+```
