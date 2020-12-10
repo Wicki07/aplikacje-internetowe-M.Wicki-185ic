@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <html>
+        <head>
+            <title>xPath oraz xmlx</title>
+        </head>
+        <body>
+
+        <div class="card-header bg-info" style="font-family:'Bevan'"><h2>Przykład 1</h2>
+            <div class="card-body" >
+                <ul class="list-group">
+                    <li class="list-group-item"> 
+                        Pobrany element:
+                        
+                        <p style="color: rgb(22, 151, 190); font-family:'Pacifico'">
+                            {{lxml1}} 
+                        </p> <br>
+
+                        Element został pobrany z: <br>
+                        <img src="https://i.imgur.com/VNqXUDH.png" alt="img2" style="width: 100%;"> <br>                         
+                    </li>
+                </ul> 
+            </div>
+        </div> 
+        <hr>
+        <div class="card-header bg-info" style="font-family:'Bevan'"><h2>Przykład 2</h2>
+            <div class="card-body" >
+                <ul class="list-group">
+                    <li class="list-group-item"> 
+                        Pobrany element:
+                        
+                        <p style="color: rgb(22, 151, 190); font-family:'Pacifico'">
+                            {{lxml2}} 
+                        </p> <br>
+
+                        Element został pobrany z: <br>
+                        <img src="https://i.imgur.com/jBxOKZu.png" alt="img1" style="width: 100%;"> <br>                         
+                    </li>
+                </ul> 
+            </div>
+        </div>
+        
+              
+        </body>
+    </html>
+{% endblock %}

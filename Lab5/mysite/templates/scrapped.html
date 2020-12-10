@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <html>
+        <head>
+            <title>Web Scraping</title>
+        </head>
+        <body>
+
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-info" style="font-family:'Yeseva One'">
+                Finished scraping <b>{{ url }}</b> site.<br>
+                Your element was: <b>{{ element }}</b><br>
+                Found <b>{{amount}}</b> elements.<br>
+            </li>
+
+            {% for i in all_links %}
+            <li class="list-group-item">
+                <b>Id</b> -> {{i.find_id}} <br>                
+                <b>Class</b>> -> {{i.find_class}} <br>                
+                <b>Link</b> -> {{i.find_href}} <br>                          
+                <b>Text</b> -> {{i.get_text}} <br>
+                <b>Src</b> -> {{i.find_src}}<br>
+                <b>Alt</b> -> {{i.find_alt}}<br>               
+            </li>
+            {% endfor %}
+    </div>
+        </body>
+    </html>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <html>
+        <head>
+            <title>Zadania z zajęć</title>
+        </head>
+
+        <ul class="list-group" style="font-family:'Yeseva One'">
+            <h3>Przykład 1</h3>
+            <li class="list-group-item list-group-item-info" >
+                <b>Pierwszy tag p:</b> {{first_p}} <br>
+                <b>Następny tag p:</b> {{another_p}} <br>
+                <b>Ilość znaczników p:</b> {{p_amount}}
+            </li><br>
+            
+            <h3>Przykład 2</h3>
+                {% for top in top_items %}
+                <li class="list-group-item list-group-item-info">
+                    <b>Nazwa:</b> {{top.title}}<br>
+                    <b>Opinia:</b> {{top.review}}<br>
+                </li>
+                {% endfor %} <br>
+            
+            <h3>Przykład 3</h3>
+                {% for im in image_data %}
+                    <li class="list-group-item list-group-item-info">
+                        <b>Źródło:</b> {{im.src}}<br>
+                        <b>Alt:</b> {{im.alt}}<br>
+                    </li>
+                {% endfor %} <br>
+            
+            <h3>Przykład 4</h3>
+                {% for ap in all_products %}
+                    <li class="list-group-item list-group-item-info">
+                        <b>Nazwa:</b> {{ap.name}}<br>
+                        <b>Opis:</b> {{ap.description}}<br>
+                        <b>Cena:</b> {{ap.price}}<br>
+                        <b>Opinie:</b> {{ap.reviews}}<br>
+                        <b>Obraz:</b> {{ap.image}}
+                    </li>
+                {% endfor %} <br>
+            
+          </ul>
+    </html>
+{% endblock %}
