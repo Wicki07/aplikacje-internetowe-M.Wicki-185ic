@@ -6,4 +6,4 @@
 ### Dodałem uwierzytelnianie, viewsets, routery oraz licznik wejść przy pomocy cookies
 
 Po zainstalowaniu ***django-rest-auth*** dodałem widok logowania, wylogowania, resetu hasła, rejsetracji, potwierdzenie resetu hasła
-![](https://imgur.com/a/ky7Js3t)
+![](https://i.imgur.com/Gp0e5Lz.png)
