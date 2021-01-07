@@ -17,4 +17,4 @@ For more information - please visit https://github.com/tporadowski/redis
 
 If you find this version of Redis useful and would like to support ongoing
 development - please consider sponsoring my work at https://github.com/sponsors/tporadowski
-[](https://i.imgur.com/TVCFxzh.png)
+![](https://i.imgur.com/TVCFxzh.png)
