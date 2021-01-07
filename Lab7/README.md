@@ -22,19 +22,19 @@ W pierwszej linijce kodu nawiązujemy połączeni z redisem następnie tworzymy 
 
 ![](https://i.imgur.com/MxWRzuF.png)
 
-Pod dodaniu warunku przy tworzeniu połączenia ``decode-responses=True``  znika z wynki `b'  '`
+
 
 ![](https://i.imgur.com/dqA0J1Y.png)
 
-Opcja `append` dodaje wartość do wartości podanego klucza natomiast `delete` usuwa klucz 
+Pod dodaniu warunku przy tworzeniu połączenia ``decode-responses=True``  znika z wynki `b'  '`
 
 ![](https://i.imgur.com/yGZn17b.png)
 
-Opcja `set` ustawia wartość podanego klucza natomiast `incr` oraz `decr` odpowiednio zwiękaszają i zmniejszają wartość klucza 
+Opcja `append` dodaje wartość do wartości podanego klucza natomiast `delete` usuwa klucz 
 
 ![](https://i.imgur.com/Ec9TPES.png) 
 
-
+Opcja `set` ustawia wartość podanego klucza natomiast `incr` oraz `decr` odpowiednio zwiękaszają i zmniejszają wartość klucza 
 
 
 
