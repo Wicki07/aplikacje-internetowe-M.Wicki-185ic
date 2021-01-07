@@ -221,4 +221,49 @@ def make_thumbnails(file_path, thumbnails=[]):
     return results
 ```
 
+![](https://i.imgur.com/lRLMnGx.png)
+
+Wynikiem jest zmiania obrazka na obrazek o wymiarach 128x128 
+
+## Tworznie tasków
+
+W pliku task wprawadzamy kod
+
+```javascript
+
+@shared_task(name='test')
+def send_notifiction():
+     print('Hello World')
+     # Another trick
+
+
+@shared_task(name='summary') 
+def send_import_summary():
+    print('Hello every 10 sec')
+```
+
+Następnie w pliku setting wprowadzamy ustawianie do tasków
+
+```javascript
+from celery.schedules import crontab
+CELERY_BEAT_SCHEDULE = {
+    # ustawienie taska cyklicznie co 10 sekund
+    'minelo 10 sekund': { 
+       'task': 'summary',
+       'schedule': 10.0
+    },
+    # Ustawienie taska tak by wykonał się o konktretnej godzinie
+    'Witaj o 15:05': {  
+         'task': 'test', 
+         'schedule': crontab(hour=17, minute=35), 
+    },
+}
+```
+Następnie uruchamiamy celery poleceniami 
+
+`
+celery -A lab7 beat -l INFO --scheduler 
+django_celery_beat.schedulers:DatabaseScheduler
+celery -A lab7 worker -l info -P gevent
+`
 ![](https://i.imgur.com/ds077AD.png)
