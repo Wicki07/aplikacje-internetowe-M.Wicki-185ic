@@ -279,7 +279,7 @@ Aby dodać brakujące komponenty należy skorzystać z poradnika ze [strony](htt
 
 ## Dodane dodatkowo
 
-Pod doadniu panelu Administratora widać zmiany jakie zachodzą można tam również edytować utworzone już tutoriale
+Pod doadniu panelu Administratora widać zmiany jakie zachodzą można tam również edytować utworzone już tutoriale. Oraz dodałem datę publikacji.
 
 ![](https://github.com/Wicki07/aplikacje-internetowe-M.Wicki-185ic/blob/master/lab9/zrzuty/4.PNG?raw=true)
 
