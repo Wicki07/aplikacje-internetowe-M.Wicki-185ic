@@ -4,4 +4,4 @@
  
 # Lab9 Django + React (aplikacja CRUD)
 
-![](https://github.com/Wicki07/aplikacje-internetowe-M.Wicki-185ic/lab9/zrzuty/1.PNG)
+![](https://github.com/Wicki07/aplikacje-internetowe-M.Wicki-185ic/blob/master/lab9/zrzuty/1.PNG?raw=true)
