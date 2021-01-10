@@ -7,4 +7,4 @@
 
 ### Główny wygląd strony
 
-![](https://github.com/Wicki07/aplikacje-internetowe-M.Wicki-185ic/blob/master/lab10/zrzuty/1.PNG?raw=true)
+![](https://github.com/Wicki07/aplikacje-internetowe-M.Wicki-185ic/blob/master/Lab10/zrzuty/1.PNG?raw=true)
