@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import TutorialDataService from "../services/tutorial.service";
 import { Link } from "react-router-dom";
+import logo1 from './logo.jpg';
+import logo2 from './merc.jpg';
+import logo3 from './audi.jpg';
+import logo4 from './skoda.jpg';
 
 export default class TutorialsList extends Component {
   constructor(props) {
@@ -83,7 +87,20 @@ export default class TutorialsList extends Component {
         console.log(e);
       });
   }
-
+  renderSwitch(param) {
+    switch(param) {
+      case 'BMW':
+        return (<img src={logo1} />);
+      case 'Audi':
+        return (<img src={logo3} />);;
+      case 'Mercedes':
+        return (<img src={logo2} />);;
+      case 'Skoda':
+        return (<img src={logo4} />);;
+      default:
+        return 'brak zdjecia';
+    }
+  }
   render() {
     const { searchTitle, tutorials, currentTutorial, currentIndex } = this.state;
 
@@ -94,7 +111,7 @@ export default class TutorialsList extends Component {
             <input
               type="text"
               className="form-control"
-              placeholder="Search by title"
+              placeholder="Szukaj po marce"
               value={searchTitle}
               onChange={this.onChangeSearchTitle}
             />
@@ -109,8 +126,8 @@ export default class TutorialsList extends Component {
             </div>
           </div>
         </div>
-        <div className="col-md-6">
-          <h4>Tutorials List</h4>
+        <div className="col-md-12">
+          <h4>Lista pojazdów</h4>
 
           <ul className="list-group">
             {tutorials &&
@@ -123,7 +140,20 @@ export default class TutorialsList extends Component {
                   onClick={() => this.setActiveTutorial(tutorial, index)}
                   key={index}
                 >
-                  {tutorial.title}
+                  {this.renderSwitch(tutorial.marka)}
+                  <b>     {tutorial.marka}</b> {tutorial.model}
+                  <br></br>
+                  <br></br>
+                  Rejestracja: {tutorial.rejestracja}<p className="">Data rejestracji: {tutorial.data_publikacji}</p>
+                  <div>
+                    <Link
+                      to={"/tutorials/" + tutorial.id}
+                      className="badge badge-pill badge-success"
+                    >
+                      Edytuj
+                    </Link>
+                  </div>
+
                 </li>
               ))}
           </ul>
@@ -134,49 +164,6 @@ export default class TutorialsList extends Component {
           >
             Remove All
           </button>
-        </div>
-        <div className="col-md-6">
-          {currentTutorial ? (
-            <div>
-              <h4>Tutorial</h4>
-              <div>
-                <label>
-                  <strong>Title:</strong>
-                </label>{" "}
-                {currentTutorial.title}
-              </div>
-              <div>
-                <label>
-                  <strong>Description:</strong>
-                </label>{" "}
-                {currentTutorial.description}
-              </div>
-              <div>
-                <label>
-                  <strong>Data publikacji:</strong>
-                </label>{" "}
-                {currentTutorial.data_publikacji}
-              </div>
-              <div>
-                <label>
-                  <strong>Status:</strong>
-                </label>{" "}
-                {currentTutorial.published ? "Published" : "Pending"}
-              </div>
-
-              <Link
-                to={"/tutorials/" + currentTutorial.id}
-                className="badge badge-warning"
-              >
-                Edit
-              </Link>
-            </div>
-          ) : (
-            <div>
-              <br />
-              <p>Please click on a Tutorial...</p>
-            </div>
-          )}
         </div>
       </div>
     );

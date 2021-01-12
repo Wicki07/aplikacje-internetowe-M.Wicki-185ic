@@ -6,47 +6,56 @@ export default class Tutorial extends Component {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeRejestracja = this.onChangeRejestracja.bind(this);
     this.getTutorial = this.getTutorial.bind(this);
     this.updatePublished = this.updatePublished.bind(this);
     this.updateTutorial = this.updateTutorial.bind(this);
     this.deleteTutorial = this.deleteTutorial.bind(this);
-
     this.state = {
       currentTutorial: {
         id: null,
-        title: "",
-        description: "",
+        marka: "",
+        model: "",
+        rejestracja: false,
         data_publikacji: "",
-        published: false
+
       },
       message: ""
     };
   }
 
+ 
   componentDidMount() {
     this.getTutorial(this.props.match.params.id);
   }
 
   onChangeTitle(e) {
     const title = e.target.value;
-
-    this.setState(function(prevState) {
-      return {
-        currentTutorial: {
-          ...prevState.currentTutorial,
-          title: title
-        }
-      };
-    });
+    console.log(title)
+    this.setState(prevState => ({
+      currentTutorial: {
+        ...prevState.currentTutorial,
+        marka: title
+      }
+    }));
   }
 
   onChangeDescription(e) {
+    const description = e.target.value;
+    this.setState(prevState => ({
+      currentTutorial: {
+        ...prevState.currentTutorial,
+        model: description
+      }
+    }));
+  }
+  onChangeRejestracja(e) {
     const description = e.target.value;
     
     this.setState(prevState => ({
       currentTutorial: {
         ...prevState.currentTutorial,
-        description: description
+        rejestracja: description
       }
     }));
   }
@@ -122,62 +131,51 @@ export default class Tutorial extends Component {
       <div>
         {currentTutorial ? (
           <div className="edit-form">
-            <h4>Tutorial</h4>
+            <h4>Pojazd</h4>
             <form>
+
               <div className="form-group">
-                <label htmlFor="title">Title</label>
+                <label htmlFor="description">Marka</label>
+                <select class="form-control" name="kategoria" id="kat" required onChange={this.onChangeTitle}>
+   					      <option disabled selected hidden>Wybierz z listy...</option>
+					        <option className="form-control" id="title" value="Audi">Audi</option>
+					        <option className="form-control" id="title" value="BMW">BMW</option>
+					        <option className="form-control" id="title" value="Mercedes">Mercedes</option>
+					        <option className="form-control" id="title" value="Skoda">Skoda</option>
+				        </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="title">Model</label>
                 <input
                   type="text"
                   className="form-control"
                   id="title"
-                  value={currentTutorial.title}
-                  onChange={this.onChangeTitle}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="description">Description</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="description"
-                  value={currentTutorial.description}
+                  value={currentTutorial.model}
                   onChange={this.onChangeDescription}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="published_date">Data publikacji</label>
+                <label htmlFor="description">rejestracja</label>
                 <input
                   type="text"
                   className="form-control"
-                  id="published_date"
-                  value={currentTutorial.data_publikacji}
+                  id="description"
+                  value={currentTutorial.rejestracja}
+                  onChange={this.onChangeRejestracja}
+                  pattern="[a-z]{2,3}+ [A-Z0-9]{4,6}$"
                 />
               </div>
-
-              <div className="form-group">
-                <label>
-                  <strong>Status:</strong>
-                </label>
-                {currentTutorial.published ? "Published" : "Pending"}
-              </div>
+              <div class="imput-group date">
+				        <label for="exampleInputEmail1">Data rejestracji</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="description"
+                  value={currentTutorial.data_publikacji}
+                />
+			        </div>
+             
             </form>
-
-            {currentTutorial.published ? (
-              <button
-                className="badge badge-primary mr-2"
-                onClick={() => this.updatePublished(false)}
-              >
-                UnPublish
-              </button>
-            ) : (
-              <button
-                className="badge badge-primary mr-2"
-                onClick={() => this.updatePublished(true)}
-              >
-                Publish
-              </button>
-            )}
-
             <button
               className="badge badge-danger mr-2"
               onClick={this.deleteTutorial}
