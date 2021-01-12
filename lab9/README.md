@@ -288,7 +288,252 @@ Pod doadniu panelu Administratora widać zmiany jakie zachodzą można tam równ
  Zmainy na stronie
  
  ![](https://github.com/Wicki07/aplikacje-internetowe-M.Wicki-185ic/blob/master/lab9/zrzuty/6.PNG?raw=true)
+ 
  ![](https://github.com/Wicki07/aplikacje-internetowe-M.Wicki-185ic/blob/master/lab9/zrzuty/7.PNG?raw=true)
+ 
+ Wyświetlanie log marek odbywa się automatycznie dzięki zastosowaniu `switch` w react
+ 
+ ```javascript
+
+ 
+   renderSwitch(param) {
+    switch(param) {
+      case 'BMW':
+        return (<img src={logo1} />);
+      case 'Audi':
+        return (<img src={logo3} />);;
+      case 'Mercedes':
+        return (<img src={logo2} />);;
+      case 'Skoda':
+        return (<img src={logo4} />);;
+      default:
+        return 'brak zdjecia';
+    }
+  }
+  ...
+  //Następnie w kodzie należy wywołać następującą funkcje
+  
+  {this.renderSwitch(tutorial.marka)}
+ ```
+ Pod dodaniu nowego modelu należy edytować fukcje które dodają dane do bazy
+ Nowy kod strony
+ 
+ ```javascript
+  // App.js
+ 
+ class App extends Component {
+  render() {
+    return (
+      <div>
+        <img src={tlo} className="mx-auto d-block"/>
+        <h1 className="text-center">Ewidencja pojazdów</h1>
+        <nav className="navbar navbar-expand navbar-dark bg-dark">
+          <a href="/tutorials" className="navbar-brand">
+            Mateusz Wicki
+          </a>
+          <div className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to={"/tutorials"} className="nav-link">
+                Pojazdy
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/add"} className="nav-link">
+                Dodaj
+              </Link>
+            </li>
+          </div>
+        </nav>
+
+        <div className="container mt-3 mx-auto">
+          <Switch>
+            <Route exact path={["/", "/tutorials"]} component={TutorialsList} />
+            <Route exact path="/add" component={AddTutorial} />
+            <Route path="/tutorials/:id" component={Tutorial} />
+          </Switch>
+        </div>
+      </div>
+    );
+  }
+}
+ ```
+ 
+ ```javascript
+//pojazdy-list.component.js
+
+import React, { Component } from "react";
+import PojazdyDataService from "../services/tutorial.service";
+import { Link } from "react-router-dom";
+import logo1 from './logo.jpg';
+import logo2 from './merc.jpg';
+import logo3 from './audi.jpg';
+import logo4 from './skoda.jpg';
+
+export default class PojazdyList extends Component {
+  constructor(props) {
+    super(props);
+    this.onChangeSearchMarka = this.onChangeSearchMarka.bind(this);
+    this.retrievePojazdy = this.retrievePojazdy.bind(this);
+    this.refreshList = this.refreshList.bind(this);
+    this.setActivePojazdy = this.setActivePojazdy.bind(this);
+    this.removeAllPojazdy = this.removeAllPojazdy.bind(this);
+    this.searchMarka = this.searchMarka.bind(this);
+
+    this.state = {
+      pojazdy: [],
+      currentPojazdy: null,
+      currentIndex: -1,
+      searchTitle: ""
+    };
+  }
+
+  componentDidMount() {
+    this.retrievePojazdy();
+  }
+
+  onChangeSearchMarka(e) {
+    const searchMarka = e.target.value;
+
+    this.setState({
+      searchTitle: searchMarka
+    });
+  }
+
+  retrievePojazdy() {
+    TutorialDataService.getAll()
+      .then(response => {
+        this.setState({
+          pojazdy: response.data
+        });
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  refreshList() {
+    this.retrievePojazdy();
+    this.setState({
+      currentPojazdy: null,
+      currentIndex: -1
+    });
+  }
+
+  setActivePojazdy(pojazdy, index) {
+    this.setState({
+      currentPojazdy: pojazdy,
+      currentIndex: index
+    });
+  }
+
+  removeAllPojazdy() {
+    TutorialDataService.deleteAll()
+      .then(response => {
+        console.log(response.data);
+        this.refreshList();
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  searchMarka() {
+    PojazdyDataService.findByMarka(this.state.searchMarka)
+      .then(response => {
+        this.setState({
+          pojazdy: response.data
+        });
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+  renderSwitch(param) {
+    switch(param) {
+      case 'BMW':
+        return (<img src={logo1} />);
+      case 'Audi':
+        return (<img src={logo3} />);;
+      case 'Mercedes':
+        return (<img src={logo2} />);;
+      case 'Skoda':
+        return (<img src={logo4} />);;
+      default:
+        return 'brak zdjecia';
+    }
+  }
+  render() {
+    const { searchMarka, pojazdy, currentTutorial, currentIndex } = this.state;
+
+    return (
+      <div className="list row">
+        <div className="col-md-8">
+          <div className="input-group mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Szukaj po marce"
+              value={searchMarka}
+              onChange={this.onChangeSearchMarka}
+            />
+            <div className="input-group-append">
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                onClick={this.searchMarka}
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-12">
+          <h4>Lista pojazdów</h4>
+
+          <ul className="list-group">
+            {pojazdy &&
+              pojazdy.map((pojazdy, index) => (
+                <li
+                  className={
+                    "list-group-item " +
+                    (index === currentIndex ? "active" : "")
+                  }
+                  onClick={() => this.setActivePojazdy(pojazdy, index)}
+                  key={index}
+                >
+                  {this.renderSwitch(pojazdy.marka)}
+                  <b>     {pojazdy.marka}</b> {pojazdy.model}
+                  <br></br>
+                  <br></br>
+                  Rejestracja: {pojazdy.rejestracja}<p className="">Data rejestracji: {pojazdy.data_publikacji}</p>
+                  <div>
+                    <Link
+                      to={"/pojazdy/" + pojazdy.id}
+                      className="badge badge-pill badge-success"
+                    >
+                      Edytuj
+                    </Link>
+                  </div>
+
+                </li>
+              ))}
+          </ul>
+
+          <button
+            className="m-3 btn btn-sm btn-danger"
+            onClick={this.removeAllPojazdy}
+          >
+            Remove All
+          </button>
+        </div>
+      </div>
+    );
+  }
+}
+ ```
+ 
 ## Błąd
 
 Po nawet poprawnym zrealizowaniu labolatorium pojawiał się błąd polegający na odmowie dostępu przez co na stronie nie pojawiały się żadne tutoriale oraz nie można ich było dodać.
