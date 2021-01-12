@@ -285,6 +285,10 @@ Pod doadniu panelu Administratora widać zmiany jakie zachodzą można tam równ
 
 ![](https://github.com/Wicki07/aplikacje-internetowe-M.Wicki-185ic/blob/master/lab9/zrzuty/5.PNG?raw=true)
 
+ Zmainy na stronie
+ 
+ ![](https://github.com/Wicki07/aplikacje-internetowe-M.Wicki-185ic/blob/master/lab9/zrzuty/6.PNG?raw=true)
+ ![](https://github.com/Wicki07/aplikacje-internetowe-M.Wicki-185ic/blob/master/lab9/zrzuty/7.PNG?raw=true)
 ## Błąd
 
 Po nawet poprawnym zrealizowaniu labolatorium pojawiał się błąd polegający na odmowie dostępu przez co na stronie nie pojawiały się żadne tutoriale oraz nie można ich było dodać.
