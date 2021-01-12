@@ -533,7 +533,152 @@ export default class PojazdyList extends Component {
   }
 }
  ```
+ ```javascript
+ //add-pojazdy.component.js
  
+import React, { Component } from "react";
+import TutorialDataService from "../services/tutorial.service";
+
+
+export default class AddPojazd extends Component {
+  constructor(props) {
+    super(props);
+    this.onChangeMarka = this.onChangeMarka.bind(this);
+    this.onChangeRejestracja = this.onChangeRejestracja.bind(this);
+    this.onChangeModel = this.onChangeModel.bind(this);
+    this.savePojazd = this.savePojazd.bind(this);
+    this.newPojazd = this.newPojazd.bind(this);
+    this.state = {
+      id: null,
+      marka: "",
+      model: "",
+      rejestracja: "",
+      data_rejestracja: "",
+      submitted: false,
+    };
+  }
+  onChangeRejestracja(e) {
+    this.setState({
+      rejestracja: e.target.value
+    });
+    console.log(this.state)
+  }
+  onChangeMarka(e) {
+    this.setState({
+      marka: e.target.value
+    });
+    console.log(this.state)
+  }
+
+  onChangeModel(e) {
+    this.setState({
+      model: e.target.value
+    });
+  }
+
+  savePojazd() {
+    var data = {
+      marka: this.state.marka,
+      model: this.state.model,
+      rejestracja: this.state.rejestracja,
+      data_rejestracji: this.state.data_rejestracja
+    };
+
+    PojazdDataService.create(data)
+      .then(response => {
+        this.setState({
+          id: response.data.id,
+          marka: response.data.title,
+          model: response.data.description,
+          rejestracja: response.data.rejestracja,
+          data_rejestracja: response.data.data_rejestracja,
+          submitted: true,
+        });
+
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  newPojazd() {
+    this.setState({
+      id: null,
+      marka: "",
+      model: "",
+      rejestracja: false,
+      data_rejestracji: "",
+
+      submitted: false,
+
+    });
+  }
+
+
+  render() {
+    return (
+
+        <div className="submit-form">
+          {this.state.submitted ? (
+            <div>
+              <h4>Pojazd pomyślnie dodany</h4>
+              <button className="btn btn-success" onClick={this.newPojazd}>
+                Add
+              </button>
+            </div>
+          ) : (
+            <div>
+            <div className="form-group">
+            <label htmlFor="marka">Marka</label>
+            <select className="form-control" name="kategoria" id="kat" required onChange={this.onChangeMarka}>
+              <option disabled hidden>Wybierz z listy...</option>
+              <option className="form-control" id="marka" value="Audi">Audi</option>
+              <option className="form-control" id="marka" value="BMW">BMW</option>
+              <option className="form-control" id="marka" value="Mercedes">Mercedes</option>
+              <option className="form-control" id="marka" value="Skoda">Skoda</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="model">Model</label>
+            <input
+              type="text"
+              className="form-control"
+              id="model"
+              onChange={this.onChangeModel}
+            />
+          </div>
+          <div className="form-group">
+                <label htmlFor="rejestracja">rejestracja</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="rejestracja"
+                  onChange={this.onChangeRejestracja}
+                  pattern="[a-z]{2,3}+ [A-Z0-9]{4,6}$"
+                />
+              </div>
+          <div className="imput-group date">
+            <label htmlFor="data_rejestracji">Data rejestracji</label>
+            <input
+              type="text"
+              className="form-control"
+              id="data_rejestracji"
+              value='YYYY-MM-DD'
+            />
+          </div>
+  
+              <button onClick={this.savePojazd} className="mt-5 btn btn-success">
+                Submit
+              </button>
+            </div>
+          )}
+        </div>
+      );
+    }
+  
+}
+ ```
 ## Błąd
 
 Po nawet poprawnym zrealizowaniu labolatorium pojawiał się błąd polegający na odmowie dostępu przez co na stronie nie pojawiały się żadne tutoriale oraz nie można ich było dodać.
