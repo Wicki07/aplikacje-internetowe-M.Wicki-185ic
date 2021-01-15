@@ -2,7 +2,7 @@
 
 ### Autor: Mateusz Wicki Grupa: 185IC_B1
  
-# Lab9 Django + React (aplikacja CRUD)
+# Lab10 
 
 
 ### Główny wygląd strony
