@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <form>
+    <div>
+      <label for="number">Podaj ilość liczb ciągu fibonacziego</label>
+      <input type="number" id="number">
+    </div>
+    <div>
+      <input type="submit">
+    </div>
+  </form>
+    <p id="result"></p>
+<script id="fibonacci" type="javascript/worker">
+    self.onmessage = function(e) {
+    let userNum = Number(e.data);
+    fibonacci(userNum);
+    }
+
+
+    function fibonacci(num){
+        let arr =[];
+        let a = 1, b = 0, temp;
+        while (num >= 0){
+            temp = a;
+            a = a + b;
+            b = temp;
+            arr.push(a)
+            num--;
+        }
+
+        self.postMessage(arr);
+        }
+</script>
+<script>
+    var blob = new Blob([document.querySelector('#fibonacci').textContent]);
+    blobURL = window.URL.createObjectURL(blob);
+    var form = document.querySelector('form');
+    var input = document.querySelector('input[type="number"]');
+    var result = document.querySelector('p#result');
+    var worker = new Worker(blobURL);
+
+    worker.onmessage = function(event) {
+      result.textContent = event.data;
+    };
+
+    form.onsubmit = function(e) {
+      e.preventDefault();
+      worker.postMessage(input.value);
+      input.value = '';
+    }
+ 
+</script>
+
+</body>
+</html>
