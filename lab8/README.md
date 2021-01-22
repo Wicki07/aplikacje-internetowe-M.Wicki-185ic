@@ -160,7 +160,11 @@ Wygląd plików `index.html` oraz `room.html`
 </html>
 
 ```
-## Chat przy użyciu socket.io
+
+
+
+
+# Chat przy użyciu socket.io
 
 Należy pamiętać aby najpierw zainstalować `Node.js`
 
@@ -469,7 +473,10 @@ W momencie w którym jakiś użytkownik zaczyna pisać pozostałym użytkownikom
 
 Po wysłaniu wiadomości pojawia się ona w odpowiednim sektorze i znika informacja, że któryś z użytkowników aktualnie coś pisze
 
-## WebWorkers
+
+
+
+# WebWorkers
 
 Worker liczący ciąg Fibonacziego
 
