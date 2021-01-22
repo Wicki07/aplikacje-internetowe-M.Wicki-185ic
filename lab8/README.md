@@ -160,7 +160,7 @@ Wygląd plików `index.html` oraz `room.html`
 </html>
 
 ```
-### Chat przy użyciu socket.io
+## Chat przy użyciu socket.io
 
 Należy pamiętać aby najpierw zainstalować `Node.js`
 
