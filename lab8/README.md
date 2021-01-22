@@ -176,4 +176,4 @@ W pierwszej kolejności tworzymy plik `package.json`, który opisuje nasz projek
 ```
 
 Instalujemy pakiet `express` przy pomocy polecenia
-     - npm install express@4
+	- npm install express@4
